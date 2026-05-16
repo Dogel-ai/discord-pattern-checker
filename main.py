@@ -32,7 +32,7 @@ logger = logging.getLogger("observer")
 class MyClient(discord.Client):
     async def on_ready(self):
         logger.info(f"Logged in as {client.user}")
-        logger.debug(f"Observing channels {config.observer_channels()}")
+        logger.info(f"Observing channels {config.observer_channels()}")
         if not config.webhook_active():
             logger.warning("Webhook is not active. Matching messages will be sent to console")
 
