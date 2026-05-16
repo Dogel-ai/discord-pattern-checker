@@ -62,12 +62,11 @@ class MyClient(discord.Client):
             logger.info(f"{message.author.name}: {message.content}")
             return
 
-        logger.info(f"Processing message from user {message.author.name} with pattern {pattern}: {message.id}")
-
         webhook = SyncWebhook.from_url(config.webhook_url())
         webhook.send(content=message.content,
                      username=message.author.name,
                      avatar_url=message.author.avatar)
+        logger.info(f"Webhook for message {message.id} sent")
 
 
 client = MyClient()
