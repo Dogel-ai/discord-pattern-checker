@@ -10,14 +10,14 @@ formatter = ColoredFormatter(
     datefmt=None,
     reset=True,
     log_colors={
-        'DEBUG': 'white',
-        'INFO': 'cyan',
-        'WARNING': 'yellow',
-        'ERROR': 'red',
-        'CRITICAL': 'red,bg_white'
+        "DEBUG": "white",
+        "INFO": "cyan",
+        "WARNING": "yellow",
+        "ERROR": "red",
+        "CRITICAL": "red,bg_white"
     },
     secondary_log_colors={},
-    style='%'
+    style="%"
 )
 
 stream = logging.StreamHandler()
@@ -30,8 +30,8 @@ logger = logging.getLogger("observer")
 
 class MyClient(discord.Client):
     async def on_ready(self):
-        logger.info(f'Logged in as {client.user}')
-        logger.debug(f'Observing channels {config.observer_channels()}')
+        logger.info(f"Logged in as {client.user}")
+        logger.debug(f"Observing channels {config.observer_channels()}")
         if not config.webhook_active():
             logger.warning(f"Webhook is not active. Matching messages will be sent to console")
 
@@ -71,5 +71,5 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     client.run(config.bot_token(), log_handler=stream, log_level=logging.INFO)

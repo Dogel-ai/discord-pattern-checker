@@ -6,10 +6,10 @@ _settings = Dynaconf(
     environments=True,
     load_dotenv=True,
     settings_files=[
-        'settings.toml',
-        '.secrets.toml',
-        'settings.yml',
-        '.secrets.yml'
+        "settings.toml",
+        ".secrets.toml",
+        "settings.yml",
+        ".secrets.yml"
     ],
     validators=[
         # Bot settings
