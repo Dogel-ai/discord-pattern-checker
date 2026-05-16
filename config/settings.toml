@@ -29,4 +29,12 @@ observer_case_sensitive = false
 webhook_active = false
 
 # The webhook URL used to send valid messages to.
-webhook_url = "<webhook_url>"
+webhook_url = ""
+
+# The name used when sending the webhook.
+# This will default to the original sender's display name.
+webhook_name = ""
+
+# The avatar used when sending the webhook.
+# This will default to the original sender's avatar.
+webhook_avatar_url = ""

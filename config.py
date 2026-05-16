@@ -57,3 +57,11 @@ def webhook_active() -> Optional[bool]:
 
 def webhook_url() -> Optional[bool]:
     return _settings.get("webhook_url") or None
+
+
+def webhook_name() -> Optional[str]:
+    return _settings.get("webhook_name") or None
+
+
+def webhook_avatar_url() -> Optional[str]:
+    return _settings.get("webhook_avatar_url") or None

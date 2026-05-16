@@ -68,9 +68,20 @@ class MyClient(discord.Client):
             return
 
         webhook = SyncWebhook.from_url(config.webhook_url())
+
+        webhook_name = message.author.name
+        if config.webhook_name():
+            webhook_name = config.webhook_name()
+
+        webhook_avatar_url = message.author.avatar
+        if config.webhook_avatar_url():
+            webhook_avatar_url = config.webhook_avatar_url()
+
+        print(webhook_name)
+        print(webhook_avatar_url)
         webhook.send(content=message.content,
-                     username=message.author.name,
-                     avatar_url=message.author.avatar)
+                     username=webhook_name,
+                     avatar_url=webhook_avatar_url)
         logger.info(f"Webhook for message {message.id} sent")
 
 
