@@ -14,7 +14,7 @@ bot_token = "<bot_token>"
 observer_bot_ignore = false
 
 # Channels that should be observed.
-# Note: Do not put your target channel (where webhook messages are sent)
+# Note: Do not include your target channel (where webhook messages are sent)
 #       It WILL result in an infinite loop of the same message being sent.
 observer_channels = ["<list_of_channel_ids"]
 
@@ -23,7 +23,7 @@ observer_channels = ["<list_of_channel_ids"]
 observer_patterns = ["<list_of_string_patterns>"]
 
 # Whether the observer should send valid messages using a webhook.
-webhook_active = true
+webhook_active = false
 
 # The webhook URL used to send valid messages to.
 webhook_url = "<webhook_url>"

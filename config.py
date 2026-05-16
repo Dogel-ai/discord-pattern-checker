@@ -35,7 +35,7 @@ def bot_token() -> str:
 
 
 def observer_bot_ignore() -> Optional[bool]:
-    return _settings.get("bot_ignore") or None
+    return _settings.get("bot_ignore") or False
 
 
 def observer_channels() -> List[int]:
@@ -47,7 +47,7 @@ def observer_patterns() -> List[str]:
 
 
 def webhook_active() -> Optional[bool]:
-    return _settings.get("webhook_active") or None
+    return _settings.get("webhook_active") or False
 
 
 def webhook_url() -> Optional[bool]:
