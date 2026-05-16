@@ -19,6 +19,7 @@ _settings = Dynaconf(
         Validator("observer_channels", must_exist=True, is_type_of=list, len_min=1),
         Validator("observer_patterns", must_exist=True, is_type_of=list, len_min=1),
         Validator("observer_bot_ignore", is_type_of=bool),
+        Validator("observer_case_sensitive", is_type_of=bool),
         # Webhook settings
         Validator("webhook_active", is_type_of=bool),
         Validator("webhook_url", is_type_of=str)
@@ -44,6 +45,10 @@ def observer_channels() -> List[int]:
 
 def observer_patterns() -> List[str]:
     return _settings.get("observer_patterns")
+
+
+def observer_case_sensitive() -> Optional[bool]:
+    return _settings.get("observer_case_sensitive") or False
 
 
 def webhook_active() -> Optional[bool]:

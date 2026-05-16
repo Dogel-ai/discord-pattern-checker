@@ -22,6 +22,9 @@ observer_channels = ["<list_of_channel_ids"]
 # Messages that satisfy this pattern will trigger the webhook send.
 observer_patterns = ["<list_of_string_patterns>"]
 
+# Whether observer should respect case when matching against messages.
+observer_case_sensitive = false
+
 # Whether the observer should send valid messages using a webhook.
 webhook_active = false
 

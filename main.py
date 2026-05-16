@@ -49,8 +49,13 @@ class MyClient(discord.Client):
             return
 
         match_found = False
+        match_message = message.content
         for pattern in config.observer_patterns():
-            if pattern in message.content:
+            if not config.observer_case_sensitive():
+                pattern = pattern.lower()
+                match_message = match_message.lower()
+
+            if pattern in match_message:
                 match_found = True
                 break
 
