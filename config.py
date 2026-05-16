@@ -25,7 +25,7 @@ _settings = Dynaconf(
         Validator("webhook_url", is_type_of=str),
         Validator("webhook_name", is_type_of=str),
         Validator("webhook_avatar_url", is_type_of=str),
-        Validator("webhook_embed_active", is_type_of=bool),
+        Validator("webhook_embed_state", is_type_of=str),
         # Embed settings
         Validator("webhook_embed.title", is_type_of=str),
         Validator("webhook_embed.description", is_type_of=str),
@@ -82,8 +82,11 @@ def webhook_avatar_url() -> Optional[str]:
     return _settings.get("webhook_avatar_url") or None
 
 
-def webhook_embed_active() -> bool:
-    return _settings.get("webhook_embed_active") or False
+def webhook_embed_state() -> Optional[str]:
+    val = _settings.get("webhook_embed_state")
+    if val == "none":
+        val = None
+    return val or None
 
 
 def webhook_embed():

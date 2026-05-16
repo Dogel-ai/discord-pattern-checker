@@ -78,31 +78,42 @@ class MyClient(discord.Client):
         if config.webhook_avatar_url():
             webhook_avatar_url = config.webhook_avatar_url()
 
-        if config.webhook_embed_active():
-            config_embed = config.webhook_embed()
+        if config.webhook_embed_state():
             config_embed_colour = None
 
             if config.webhook_embed_colour():
                 config_embed_colour = discord.Colour.from_str(config_embed.colour)
 
-            e = discord.Embed(title=config_embed.title,
-                              description=config_embed.description,
-                              colour=config_embed_colour,
-                              url=config_embed.url,
-                              timestamp=message.created_at)
+            if config.webhook_embed_state() == "custom":
+                config_embed = config.webhook_embed()
 
-            e.set_author(name=config_embed.author.name,
-                         url=config_embed.author.url,
-                         icon_url=config_embed.author.icon_url)
+                e = discord.Embed(title=config_embed.title,
+                                  description=config_embed.description,
+                                  colour=config_embed_colour,
+                                  url=config_embed.url,
+                                  timestamp=message.created_at)
 
-            e.set_thumbnail(url=config_embed.thumbnail_url)
-            e.set_footer(text=config_embed.footer.text,
-                         icon_url=config_embed.footer.icon_url)
+                e.set_author(name=config_embed.author.name,
+                             url=config_embed.author.url,
+                             icon_url=config_embed.author.icon_url)
 
-            for fields in config_embed.fields:
-                e.add_field(name=config_embed.fields[fields]["name"],
-                            value=config_embed.fields[fields]["value"],
-                            inline=config_embed.fields[fields]["inline"])
+                e.set_thumbnail(url=config_embed.thumbnail_url)
+                e.set_footer(text=config_embed.footer.text,
+                             icon_url=config_embed.footer.icon_url)
+
+                for fields in config_embed.fields:
+                    e.add_field(name=config_embed.fields[fields]["name"],
+                                value=config_embed.fields[fields]["value"],
+                                inline=config_embed.fields[fields]["inline"])
+
+            else:
+                e = discord.Embed(title=pattern,
+                                  description=message.content,
+                                  timestamp=message.created_at)
+                e.set_author(name=message.author.name,
+                             icon_url=message.author.avatar)
+                e.set_footer(text=message.guild.name,
+                             icon_url=message.guild.icon)
 
             webhook.send(username=webhook_name,
                          avatar_url=webhook_avatar_url,

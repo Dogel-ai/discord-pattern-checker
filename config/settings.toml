@@ -40,7 +40,8 @@ webhook_name = ""
 webhook_avatar_url = ""
 
 # Whether to send the message as an embed
-webhook_embed_active = false
+# Use: [custom, original, none]
+webhook_embed_state = "original"
 
 webhook_embed.title = "<embed_title>"
 webhook_embed.description = "<embed_description>"
