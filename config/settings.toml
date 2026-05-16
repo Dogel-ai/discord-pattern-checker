@@ -1,0 +1,29 @@
+
+[default]
+
+# Logger output level.
+# Note: Consider providing this via environment variable instead.
+# Use: [DEBUG, INFO, WARNING, ERROR, CRITICAL]
+log_level = "INFO"
+
+# The token used to log into the Discord bot.
+# Note: Consider providing this via environment variable instead.
+bot_token = "<bot_token>"
+
+# Whether the observer should ignore bot messages.
+observer_bot_ignore = false
+
+# Channels that should be observed.
+# Note: Do not put your target channel (where webhook messages are sent)
+#       It WILL result in an infinite loop of the same message being sent.
+observer_channels = ["<list_of_channel_ids"]
+
+# List of strings to match messages against
+# Messages that satisfy this pattern will trigger the webhook send.
+observer_patterns = ["<list_of_string_patterns>"]
+
+# Whether the observer should send valid messages using a webhook.
+webhook_active = true
+
+# The webhook URL used to send valid messages to.
+webhook_url = "<webhook_url>"
