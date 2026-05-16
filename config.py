@@ -22,7 +22,22 @@ _settings = Dynaconf(
         Validator("observer_case_sensitive", is_type_of=bool),
         # Webhook settings
         Validator("webhook_active", is_type_of=bool),
-        Validator("webhook_url", is_type_of=str)
+        Validator("webhook_url", is_type_of=str),
+        Validator("webhook_name", is_type_of=str),
+        Validator("webhook_avatar_url", is_type_of=str),
+        Validator("webhook_embed_active", is_type_of=bool),
+        # Embed settings
+        Validator("webhook_embed.title", is_type_of=str),
+        Validator("webhook_embed.description", is_type_of=str),
+        Validator("webhook_embed.url", default=None),
+        Validator("webhook_embed.colour", default=None),
+        Validator("webhook_embed.thumbnail_url", default=None),
+        Validator("webhook_embed.image_url", default=None),
+        Validator("webhook_embed.footer.text", is_type_of=str),
+        Validator("webhook_embed.footer.icon_url", default=None),
+        Validator("webhook_embed.author.name", is_type_of=str),
+        Validator("webhook_embed.author.url", default=None),
+        Validator("webhook_embed.author.icon_url", default=None),
     ]
 )
 
@@ -35,7 +50,7 @@ def bot_token() -> str:
     return _settings.get("bot_token")
 
 
-def observer_bot_ignore() -> Optional[bool]:
+def observer_bot_ignore() -> bool:
     return _settings.get("bot_ignore") or False
 
 
@@ -47,11 +62,11 @@ def observer_patterns() -> List[str]:
     return _settings.get("observer_patterns")
 
 
-def observer_case_sensitive() -> Optional[bool]:
+def observer_case_sensitive() -> bool:
     return _settings.get("observer_case_sensitive") or False
 
 
-def webhook_active() -> Optional[bool]:
+def webhook_active() -> bool:
     return _settings.get("webhook_active") or False
 
 
@@ -65,3 +80,15 @@ def webhook_name() -> Optional[str]:
 
 def webhook_avatar_url() -> Optional[str]:
     return _settings.get("webhook_avatar_url") or None
+
+
+def webhook_embed_active() -> bool:
+    return _settings.get("webhook_embed_active") or False
+
+
+def webhook_embed():
+    return _settings.get("webhook_embed")
+
+
+def webhook_embed_colour() -> Optional[str]:
+    return _settings.get("webhook_embed_colour") or None

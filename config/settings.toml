@@ -38,3 +38,28 @@ webhook_name = ""
 # The avatar used when sending the webhook.
 # This will default to the original sender's avatar.
 webhook_avatar_url = ""
+
+# Whether to send the message as an embed
+webhook_embed_active = false
+
+webhook_embed.title = "<embed_title>"
+webhook_embed.description = "<embed_description>"
+webhook_embed.url = "<embed_url>"
+webhook_embed.color = "<embed_color>"
+webhook_embed.thumbnail_url = "<embed_thumbnail_url>"
+webhook_embed.image_url = "<embed_image_url>"
+
+webhook_embed.footer.text = "<embed_footer_text>"
+webhook_embed.footer.icon_url = "<embed_footer_icon_url>"
+
+webhook_embed.author.name = "<embed_author_name>"
+webhook_embed.author.url = "<embed_author_url>"
+webhook_embed.author.icon_url = "<embed_author_icon_url>"
+
+webhook_embed.fields.1.name = "<embed_fields_1_name>"
+webhook_embed.fields.1.value = "<embed_fields_1_value>"
+webhook_embed.fields.1.inline = true
+
+webhook_embed.fields.2.name = "<embed_fields_2_name>"
+webhook_embed.fields.2.value = "<embed_fields_2_value>"
+webhook_embed.fields.2.inline = true

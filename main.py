@@ -1,6 +1,7 @@
 import config
 import discord
 import logging
+import datetime
 
 from discord import SyncWebhook
 from colorlog import ColoredFormatter
@@ -33,7 +34,7 @@ class MyClient(discord.Client):
         logger.info(f"Logged in as {client.user}")
         logger.debug(f"Observing channels {config.observer_channels()}")
         if not config.webhook_active():
-            logger.warning(f"Webhook is not active. Matching messages will be sent to console")
+            logger.warning("Webhook is not active. Matching messages will be sent to console")
 
     async def on_message(self, message):
         if message.author.id == self.user.id:
@@ -77,11 +78,40 @@ class MyClient(discord.Client):
         if config.webhook_avatar_url():
             webhook_avatar_url = config.webhook_avatar_url()
 
-        print(webhook_name)
-        print(webhook_avatar_url)
-        webhook.send(content=message.content,
-                     username=webhook_name,
-                     avatar_url=webhook_avatar_url)
+        if config.webhook_embed_active():
+            config_embed = config.webhook_embed()
+            config_embed_colour = None
+
+            if config.webhook_embed_colour():
+                config_embed_colour = discord.Colour.from_str(config_embed.colour)
+
+            e = discord.Embed(title=config_embed.title,
+                              description=config_embed.description,
+                              colour=config_embed_colour,
+                              url=config_embed.url,
+                              timestamp=message.created_at)
+
+            e.set_author(name=config_embed.author.name,
+                         url=config_embed.author.url,
+                         icon_url=config_embed.author.icon_url)
+
+            e.set_thumbnail(url=config_embed.thumbnail_url)
+            e.set_footer(text=config_embed.footer.text,
+                         icon_url=config_embed.footer.icon_url)
+
+            for fields in config_embed.fields:
+                e.add_field(name=config_embed.fields[fields]["name"],
+                            value=config_embed.fields[fields]["value"],
+                            inline=config_embed.fields[fields]["inline"])
+
+            webhook.send(username=webhook_name,
+                         avatar_url=webhook_avatar_url,
+                         embed=e)
+        else:
+            webhook.send(content=message.content,
+                         username=webhook_name,
+                         avatar_url=webhook_avatar_url)
+
         logger.info(f"Webhook for message {message.id} sent")
 
 
